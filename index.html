@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
+  <div id="startseite" class="container">
     <h1>Fahrtgeld-Rechner</h1>
-    <label for="personen">Anzahl der Personen:</label>
-    <select id="personen">
+    <label for="crew">Crew:</label>
+    <select id="crew">
       <option value="5" selected>5 Personen</option>
       <option value="7">7 Personen</option>
       <option value="8">8 Personen</option>
@@ -19,6 +19,14 @@
     <div id="kilometer-felder"></div>
 
     <button id="berechnen">Berechnen</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <div id="ergebnisseite" class="container" style="display: none;">
+    <h1>Fahrtgeld-Ergebnisse</h1>
+    <div id="ergebnis-tabelle"></div>
+    <div id="ergebnis-summary"></div>
+    <button id="zurueck">Zurück</button>
   </div>
 
   <script src="script.js"></script>
