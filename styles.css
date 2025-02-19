@@ -14,8 +14,14 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px; /* Breite vergrößert */
+  width: 500px; /* Breite vergrößert */
   text-align: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -57,9 +63,13 @@ button:hover {
 }
 
 #kilometer-felder label {
-  width: 100px; /* Breite für die Personentitel */
+  width: 120px; /* Breite für die Personentitel */
   margin-right: 10px;
   text-align: left;
+}
+
+#kilometer-felder input {
+  flex: 1; /* Gleiche Breite für alle Eingabefelder */
 }
 
 #ergebnis-tabelle table {
