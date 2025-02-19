@@ -92,8 +92,11 @@ document.getElementById('berechnen').addEventListener('click', function () {
   const summeAbgerundet = abgerundeteBetraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
   const restbetrag = gesamtkosten - summeAbgerundet;
 
-  // Restbetrag dem Referee gutschreiben
-  abgerundeteBetraege[0].betrag += restbetrag;
+  // Restbetrag auf die Top-Fahrer aufteilen (in vollen Euro)
+  const restProPerson = Math.floor(restbetrag / anzahlAutos);
+  topFahrer.forEach((fahrer, index) => {
+    abgerundeteBetraege[fahrer.person - 1].betrag += restProPerson;
+  });
 
   // Ergebnisse anzeigen
   document.getElementById('startseite').style.display = 'none';
@@ -137,7 +140,6 @@ document.getElementById('berechnen').addEventListener('click', function () {
         )
         .join('')}
     </ul>
-    <p>Restbetrag: ${restbetrag.toFixed(2)} € (wird ${personenBezeichnungen[1]} gutgeschrieben)</p>
   `;
   document.getElementById('ergebnis-summary').innerHTML = summary;
 });
