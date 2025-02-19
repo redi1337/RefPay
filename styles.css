@@ -14,7 +14,7 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 400px; /* Breite vergrößert */
   text-align: center;
 }
 
@@ -48,6 +48,18 @@ button {
 
 button:hover {
   background-color: #218838;
+}
+
+#kilometer-felder div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#kilometer-felder label {
+  width: 100px; /* Breite für die Personentitel */
+  margin-right: 10px;
+  text-align: left;
 }
 
 #ergebnis-tabelle table {
