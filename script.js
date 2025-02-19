@@ -72,6 +72,7 @@ document.getElementById('berechnen').addEventListener('click', function () {
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
   const betraege = kilometerWerte.map(fahrer => ({
     person: fahrer.person,
+    kilometer: fahrer.kilometer,
     betrag: (fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten,
   }));
 
