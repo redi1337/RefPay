@@ -43,8 +43,31 @@ button {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  margin: 5px;
 }
 
 button:hover {
   background-color: #218838;
+}
+
+#ergebnis-tabelle table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#ergebnis-tabelle th, #ergebnis-tabelle td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#ergebnis-tabelle th {
+  background-color: #f2f2f2;
+}
+
+#ergebnis-summary {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
