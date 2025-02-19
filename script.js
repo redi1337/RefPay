@@ -102,7 +102,7 @@ document.getElementById('berechnen').addEventListener('click', function () {
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
 
-  // Tabelle erstellen
+  // Tabelle erstellen (behält die Reihenfolge der Startseite)
   const tabelle = `
     <table>
       <tr>
@@ -110,13 +110,13 @@ document.getElementById('berechnen').addEventListener('click', function () {
         <th>Kilometer</th>
         <th>Erhaltener Betrag</th>
       </tr>
-      ${abgerundeteBetraege
+      ${kilometerWerte
         .map(
           (fahrer) => `
         <tr>
           <td>${personenBezeichnungen[fahrer.person]}</td>
           <td>${fahrer.kilometer} km</td>
-          <td>${fahrer.betrag.toFixed(2)} €</td>
+          <td>${abgerundeteBetraege[fahrer.person - 1].betrag.toFixed(2)} €</td>
         </tr>
       `
         )
@@ -125,15 +125,15 @@ document.getElementById('berechnen').addEventListener('click', function () {
   `;
   document.getElementById('ergebnis-tabelle').innerHTML = tabelle;
 
-  // Zusammenfassung anzeigen
+  // Zusammenfassung anzeigen (Top-Autos als "Auto 1", "Auto 2" usw.)
   const summary = `
     <p>Gesamtsumme: ${gesamtkosten.toFixed(2)} €</p>
     <p>Berechnete Autos:</p>
     <ul>
       ${topFahrer
         .map(
-          (fahrer) => `
-        <li>${personenBezeichnungen[fahrer.person]}: ${fahrer.kilometer} km × 0,35 €/km = ${(
+          (fahrer, index) => `
+        <li>Auto ${index + 1}: ${fahrer.kilometer} km × 0,35 €/km = ${(
             fahrer.kilometer * 0.35
           ).toFixed(2)} €</li>
       `
