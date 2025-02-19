@@ -16,12 +16,18 @@ function createKilometerFields(anzahlPersonen) {
   kilometerFelder.innerHTML = ''; // Vorhandene Felder löschen
 
   for (let i = 1; i <= anzahlPersonen; i++) {
+    const container = document.createElement('div');
+    const label = document.createElement('label');
+    label.textContent = `${personenBezeichnungen[i]}:`;
     const input = document.createElement('input');
     input.type = 'number';
-    input.placeholder = `Kilometer für ${personenBezeichnungen[i]}`;
+    input.placeholder = `Kilometer`;
     input.id = `person-${i}`;
     input.value = 0; // Standardwert auf 0 setzen
-    kilometerFelder.appendChild(input);
+
+    container.appendChild(label);
+    container.appendChild(input);
+    kilometerFelder.appendChild(container);
   }
 }
 
@@ -76,6 +82,19 @@ document.getElementById('berechnen').addEventListener('click', function () {
     betrag: (fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten,
   }));
 
+  // Beträge auf den vollen Euro abrunden
+  const abgerundeteBetraege = betraege.map(fahrer => ({
+    ...fahrer,
+    betrag: Math.floor(fahrer.betrag), // Abrunden
+  }));
+
+  // Restbetrag berechnen
+  const summeAbgerundet = abgerundeteBetraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+  const restbetrag = gesamtkosten - summeAbgerundet;
+
+  // Restbetrag dem Referee gutschreiben
+  abgerundeteBetraege[0].betrag += restbetrag;
+
   // Ergebnisse anzeigen
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
@@ -88,7 +107,7 @@ document.getElementById('berechnen').addEventListener('click', function () {
         <th>Kilometer</th>
         <th>Erhaltener Betrag</th>
       </tr>
-      ${betraege
+      ${abgerundeteBetraege
         .map(
           (fahrer) => `
         <tr>
@@ -118,6 +137,7 @@ document.getElementById('berechnen').addEventListener('click', function () {
         )
         .join('')}
     </ul>
+    <p>Restbetrag: ${restbetrag.toFixed(2)} € (wird ${personenBezeichnungen[1]} gutgeschrieben)</p>
   `;
   document.getElementById('ergebnis-summary').innerHTML = summary;
 });
