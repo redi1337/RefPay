@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Startseite -->
   <div id="startseite" class="container">
     <!-- Logo-Container für die Startseite -->
     <div class="logo-container">
       <img src="logo.png" alt="RefPay Logo" class="logo">
     </div>
 
+    <!-- Dropdown für die Schiedsrichter-Crew -->
     <label for="crew">Schiedsrichter-Crew:</label>
     <select id="crew">
       <option value="5" selected>5er Crew</option>
@@ -20,21 +22,38 @@
       <option value="8">8er Crew</option>
     </select>
 
+    <!-- Kilometer-Eingabefelder -->
     <div id="kilometer-felder"></div>
 
+    <!-- Buttons -->
     <button id="berechnen">Berechnen</button>
     <button id="reset">Reset</button>
   </div>
 
+  <!-- Ergebnisseite -->
   <div id="ergebnisseite" class="container" style="display: none;">
     <!-- Logo-Container für die Ergebnisseite -->
     <div class="logo-container">
       <img src="logo.png" alt="RefPay Logo" class="logo">
     </div>
 
+    <!-- Überschrift für die Ergebnisse -->
     <h1>RefPay-Ergebnisse</h1>
+
+    <!-- Tabelle mit den Ergebnissen -->
     <div id="ergebnis-tabelle"></div>
-    <div id="ergebnis-summary"></div>
+
+    <!-- Zusammenfassung (Gesamtsumme und berechnete Autos) -->
+    <div id="ergebnis-summary">
+      <p>Gesamtsumme: 100,00 €</p>
+      <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
+      <ul>
+        <li>Auto 1: 100 km × 0,35 €/km = 35,00 €</li>
+        <li>Auto 2: 80 km × 0,35 €/km = 28,00 €</li>
+      </ul>
+    </div>
+
+    <!-- Zurück-Button -->
     <button id="zurueck">Zurück</button>
   </div>
 
@@ -43,6 +62,7 @@
     RefPay v1.2
   </footer>
 
+  <!-- JavaScript-Datei -->
   <script src="script.js"></script>
 </body>
 </html>
