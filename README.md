@@ -1,4 +1,4 @@
-Created by Nico Lang (2025)
+RefPay v 1.2
     
     Öffnen Sie die Seite im Browser.
     Geben Sie die Kilometer ein und klicken Sie auf Berechnen.
