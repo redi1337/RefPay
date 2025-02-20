@@ -21,6 +21,7 @@ body {
   width: 90%; /* Breite anpassen für Mobilgeräte */
   max-width: 500px; /* Maximale Breite für Desktop */
   margin: 20px 0; /* Abstand nach oben/unten */
+  flex-grow: 0; /* Verhindert, dass der Container den gesamten Platz einnimmt */
 }
 
 /* Logo in die Mitte setzen */
@@ -129,12 +130,14 @@ button:hover {
   margin-bottom: 5px;
 }
 
-/* Footer */
+/* Footer-Stile anpassen */
 footer {
   text-align: center;
   padding: 10px;
   background-color: #1e1e1e; /* Dunkler Hintergrund */
   color: #e0e0e0; /* Heller Text */
   font-size: 12px;
-  margin-top: auto; /* Footer bleibt unten */
+  width: 100%; /* Footer nimmt die gesamte Breite ein */
+  position: fixed; /* Footer bleibt am unteren Rand */
+  bottom: 0; /* Footer am unteren Rand fixieren */
 }
