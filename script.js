@@ -63,8 +63,8 @@ document.getElementById('berechnen').addEventListener('click', function () {
   // Anzahl der Autos ermitteln
   const anzahlAutos = anzahlPersonen === 5 ? 2 : 3;
 
-  // Personen mit den meisten Kilometern ermitteln
-  const topFahrer = kilometerWerte
+  // Personen mit den meisten Kilometern ermitteln (kopiere die Liste, um die ursprüngliche Reihenfolge zu behalten)
+  const topFahrer = [...kilometerWerte]
     .sort((a, b) => b.kilometer - a.kilometer)
     .slice(0, anzahlAutos);
 
