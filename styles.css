@@ -121,18 +121,18 @@ button:hover {
 /* Stile für die Überschrift "Berechnete Autos" */
 .berechnete-autos-ueberschrift {
   margin-top: 20px; /* Abstand nach oben */
+  padding-top: 20px; /* Abstand nach der Trennlinie */
+  border-top: 1px solid #444; /* Trennlinie oben */
   font-size: 18px;
   font-weight: bold;
   color: #e0e0e0; /* Heller Text */
 }
 
-/* Trennlinie oberhalb der berechneten Autos */
+/* Stile für die berechneten Autos */
 #ergebnis-summary ul {
   list-style-type: none; /* Keine Aufzählungszeichen */
   padding: 0;
-  margin-top: 20px; /* Abstand nach oben */
-  border-top: 1px solid #444; /* Trennlinie oben */
-  padding-top: 20px; /* Abstand nach der Trennlinie */
+  margin-top: 10px; /* Abstand nach oben */
 }
 
 #ergebnis-summary li {
