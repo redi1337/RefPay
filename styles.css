@@ -32,6 +32,11 @@ body {
   margin-bottom: 20px; /* Abstand unter dem Logo */
 }
 
+/* Logo auf der Ergebnisseite nach oben verschieben */
+#ergebnisseite .logo-container {
+  margin-bottom: 10px; /* Weniger Abstand unter dem Logo */
+}
+
 /* Logo-Stile */
 .logo {
   width: 100%; /* Logo passt sich der Breite des Containers an */
@@ -96,7 +101,7 @@ button:hover {
 #ergebnis-tabelle table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 20px; /* Abstand nach oben */
 }
 
 #ergebnis-tabelle th, #ergebnis-tabelle td {
