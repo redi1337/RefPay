@@ -110,24 +110,27 @@ button:hover {
   background-color: #333; /* Dunkler Hintergrund für Tabellenkopf */
 }
 
-#ergebnis-summary {
-  margin-top: 20px;
+/* Stile für die Gesamtsumme */
+#ergebnis-summary p {
+  margin-bottom: 20px; /* Abstand nach unten */
   font-size: 18px;
   font-weight: bold;
   color: #e0e0e0; /* Heller Text */
 }
 
-#ergebnis-summary p, #ergebnis-summary ul {
-  color: #e0e0e0; /* Heller Text */
-}
-
+/* Stile für die berechneten Autos */
 #ergebnis-summary ul {
   list-style-type: none; /* Keine Aufzählungszeichen */
   padding: 0;
+  margin-top: 20px; /* Abstand nach oben */
+  border-top: 1px solid #444; /* Trennlinie oben */
+  padding-top: 20px; /* Abstand nach der Trennlinie */
 }
 
 #ergebnis-summary li {
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Abstand zwischen den Auto-Einträgen */
+  font-size: 16px;
+  color: #e0e0e0; /* Heller Text */
 }
 
 /* Footer-Stile anpassen */
@@ -136,7 +139,7 @@ footer {
   padding: 10px;
   background-color: #1e1e1e; /* Dunkler Hintergrund */
   color: #e0e0e0; /* Heller Text */
-  font-size: 12px;
+  font-size: 14px; /* Größere Schrift */
   width: 100%; /* Footer nimmt die gesamte Breite ein */
   position: fixed; /* Footer bleibt am unteren Rand */
   bottom: 0; /* Footer am unteren Rand fixieren */
