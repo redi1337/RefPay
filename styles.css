@@ -21,10 +21,19 @@ body {
   flex: 1; /* Container nimmt verfügbaren Platz ein */
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #ffffff; /* Weiße Überschrift */
+/* Logo in die Mitte setzen */
+.logo-container {
+  display: flex;
+  justify-content: center; /* Horizontal zentrieren */
+  align-items: center; /* Vertikal zentrieren */
+  margin-bottom: 20px; /* Abstand unter dem Logo */
+}
+
+/* Logo-Stile */
+.logo {
+  width: 100%; /* Logo passt sich der Breite des Containers an */
+  max-width: 250px; /* Maximale Breite des Logos */
+  height: auto; /* Höhe automatisch anpassen */
 }
 
 label {
@@ -126,11 +135,4 @@ footer {
   color: #e0e0e0; /* Heller Text */
   font-size: 12px;
   margin-top: auto; /* Footer bleibt unten */
-}
-
-/* Logo-Stile */
-.logo {
-  width: 100%; /* Logo passt sich der Breite des Containers an */
-  max-width: 250px; /* Maximale Breite des Logos */
-  margin-bottom: 20px; /* Abstand unter dem Logo */
 }
