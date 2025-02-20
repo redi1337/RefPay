@@ -23,7 +23,7 @@ function createKilometerFields(anzahlPersonen) {
     input.type = 'number';
     input.placeholder = `Kilometer`;
     input.id = `person-${i}`;
-    input.value = 0; // Standardwert auf 0 setzen
+    input.value = ''; // Keine Vorausfüllung mit 0
 
     container.appendChild(label);
     container.appendChild(input);
@@ -46,7 +46,7 @@ document.getElementById('crew').addEventListener('change', function () {
 // Reset-Button: Kilometer-Eingaben auf 0 setzen
 document.getElementById('reset').addEventListener('click', function () {
   const inputs = document.querySelectorAll('#kilometer-felder input');
-  inputs.forEach(input => (input.value = 0));
+  inputs.forEach(input => (input.value = ''));
 });
 
 // Berechnung der Fahrtkosten und Anzeige der Ergebnisse
