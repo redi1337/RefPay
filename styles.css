@@ -7,9 +7,12 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Vertikal zentrieren */
+  align-items: center; /* Horizontal zentrieren */
   min-height: 100vh; /* Mindesthöhe des Viewports */
 }
 
+/* Container-Stile anpassen */
 .container {
   background-color: #1e1e1e; /* Dunkler Container-Hintergrund */
   padding: 20px;
@@ -17,8 +20,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Dunkler Schatten */
   width: 90%; /* Breite anpassen für Mobilgeräte */
   max-width: 500px; /* Maximale Breite für Desktop */
-  margin: 20px auto; /* Zentrieren und Abstand nach oben/unten */
-  flex: 1; /* Container nimmt verfügbaren Platz ein */
+  margin: 20px 0; /* Abstand nach oben/unten */
 }
 
 /* Logo in die Mitte setzen */
