@@ -6,9 +6,8 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh; /* Mindesthöhe des Viewports */
 }
 
 .container {
@@ -16,8 +15,10 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Dunkler Schatten */
-  width: 500px; /* Breite vergrößert */
-  text-align: center;
+  width: 90%; /* Breite anpassen für Mobilgeräte */
+  max-width: 500px; /* Maximale Breite für Desktop */
+  margin: 20px auto; /* Zentrieren und Abstand nach oben/unten */
+  flex: 1; /* Container nimmt verfügbaren Platz ein */
 }
 
 .logo {
@@ -122,4 +123,14 @@ button:hover {
 
 #ergebnis-summary li {
   margin-bottom: 5px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #1e1e1e; /* Dunkler Hintergrund */
+  color: #e0e0e0; /* Heller Text */
+  font-size: 12px;
+  margin-top: auto; /* Footer bleibt unten */
 }
