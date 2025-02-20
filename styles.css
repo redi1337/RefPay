@@ -21,13 +21,6 @@ body {
   flex: 1; /* Container nimmt verfügbaren Platz ein */
 }
 
-.logo {
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 20px;
-  filter: brightness(0.8); /* Logo etwas dunkler machen */
-}
-
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
@@ -133,4 +126,11 @@ footer {
   color: #e0e0e0; /* Heller Text */
   font-size: 12px;
   margin-top: auto; /* Footer bleibt unten */
+}
+
+/* Logo-Stile */
+.logo {
+  width: 100%; /* Logo passt sich der Breite des Containers an */
+  max-width: 250px; /* Maximale Breite des Logos */
+  margin-bottom: 20px; /* Abstand unter dem Logo */
 }
