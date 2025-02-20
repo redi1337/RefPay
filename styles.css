@@ -121,8 +121,6 @@ button:hover {
 /* Stile für die Überschrift "Berechnete Autos" */
 .berechnete-autos-ueberschrift {
   margin-top: 20px; /* Abstand nach oben */
-  padding-top: 20px; /* Abstand nach der Trennlinie */
-  border-top: 1px solid #666; /* Trennlinie oben (hellere Farbe) */
   font-size: 18px;
   font-weight: bold;
   color: #e0e0e0; /* Heller Text */
