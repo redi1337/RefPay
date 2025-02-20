@@ -112,13 +112,16 @@ document.getElementById('berechnen').addEventListener('click', function () {
       </tr>
       ${kilometerWerte
         .map(
-          (fahrer) => `
-        <tr>
-          <td>${personenBezeichnungen[fahrer.person]}</td>
-          <td>${fahrer.kilometer} km</td>
-          <td>${abgerundeteBetraege[fahrer.person - 1].betrag.toFixed(2)} €</td>
-        </tr>
-      `
+          (fahrer) => {
+            const betrag = abgerundeteBetraege.find(b => b.person === fahrer.person).betrag;
+            return `
+              <tr>
+                <td>${personenBezeichnungen[fahrer.person]}</td>
+                <td>${fahrer.kilometer} km</td>
+                <td>${betrag.toFixed(2)} €</td>
+              </tr>
+            `;
+          }
         )
         .join('')}
     </table>
