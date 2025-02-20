@@ -1,20 +1,21 @@
+/* Dark Mode */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #121212; /* Dunkler Hintergrund */
+  color: #e0e0e0; /* Heller Text */
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  position: relative;
 }
 
 .container {
-  background-color: #fff;
+  background-color: #1e1e1e; /* Dunkler Container-Hintergrund */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Dunkler Schatten */
   width: 500px; /* Breite vergrößert */
   text-align: center;
 }
@@ -23,28 +24,38 @@ body {
   width: 100%;
   max-width: 300px;
   margin-bottom: 20px;
+  filter: brightness(0.8); /* Logo etwas dunkler machen */
 }
 
 h1 {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #ffffff; /* Weiße Überschrift */
 }
 
 label {
   display: block;
   margin-bottom: 10px;
+  color: #e0e0e0; /* Heller Text */
 }
 
 select, input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #444; /* Dunkler Rand */
   border-radius: 4px;
+  background-color: #333; /* Dunkler Hintergrund für Eingabefelder */
+  color: #e0e0e0; /* Heller Text */
+}
+
+select:focus, input:focus {
+  border-color: #28a745; /* Grüner Rand beim Fokussieren */
+  outline: none;
 }
 
 button {
-  background-color: #28a745;
+  background-color: #28a745; /* Grüne Buttons */
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -54,7 +65,7 @@ button {
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #218838; /* Dunkleres Grün beim Hover */
 }
 
 #kilometer-felder div {
@@ -67,10 +78,13 @@ button:hover {
   width: 120px; /* Breite für die Personentitel */
   margin-right: 10px;
   text-align: left;
+  color: #e0e0e0; /* Heller Text */
 }
 
 #kilometer-felder input {
   flex: 1; /* Gleiche Breite für alle Eingabefelder */
+  background-color: #333; /* Dunkler Hintergrund für Eingabefelder */
+  color: #e0e0e0; /* Heller Text */
 }
 
 #ergebnis-tabelle table {
@@ -80,25 +94,32 @@ button:hover {
 }
 
 #ergebnis-tabelle th, #ergebnis-tabelle td {
-  border: 1px solid #ddd;
+  border: 1px solid #444; /* Dunkler Rand */
   padding: 8px;
   text-align: left;
+  color: #e0e0e0; /* Heller Text */
 }
 
 #ergebnis-tabelle th {
-  background-color: #f2f2f2;
+  background-color: #333; /* Dunkler Hintergrund für Tabellenkopf */
 }
 
 #ergebnis-summary {
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
+  color: #e0e0e0; /* Heller Text */
 }
 
-footer {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  font-size: 12px;
-  color: #666;
+#ergebnis-summary p, #ergebnis-summary ul {
+  color: #e0e0e0; /* Heller Text */
+}
+
+#ergebnis-summary ul {
+  list-style-type: none; /* Keine Aufzählungszeichen */
+  padding: 0;
+}
+
+#ergebnis-summary li {
+  margin-bottom: 5px;
 }
