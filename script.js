@@ -98,6 +98,12 @@ document.getElementById('berechnen').addEventListener('click', function () {
     abgerundeteBetraege[fahrer.person - 1].betrag += restProPerson;
   });
 
+  // Verbleibenden Restbetrag dem Fahrer mit den meisten Kilometern gutschreiben
+  const verbleibenderRest = gesamtkosten - abgerundeteBetraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+  if (verbleibenderRest > 0) {
+    abgerundeteBetraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
+  }
+
   // Ergebnisse anzeigen
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
