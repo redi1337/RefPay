@@ -19,7 +19,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   width: 90%;
   max-width: 500px;
-  margin: 20px 0;
+  margin: 20px 0 60px; /* Mehr Abstand unten für Footer */
   flex-grow: 0;
 }
 
@@ -68,7 +68,7 @@ button {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  margin: 5px;
+  margin: 5px 5px 15px; /* Mehr Abstand unten */
 }
 
 button:hover {
@@ -166,13 +166,12 @@ button:hover {
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 20px;
+  position: relative;
+  margin-top: 20px;
+  padding: 15px 0;
   background-color: #1e1e1e;
-  color: #e0e0e0;
   width: 100%;
-  position: fixed;
-  bottom: 0;
+  text-align: center;
 }
 
 .footer-content {
@@ -198,4 +197,24 @@ footer {
 .version {
   font-size: 12px;
   color: #999;
+}
+
+.footer-spacer {
+  height: 20px;
+}
+
+/* Mobile Optimierungen */
+@media (max-width: 768px) {
+  .container {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+  
+  button {
+    padding: 12px 24px;
+  }
+  
+  #ergebnisseite {
+    padding-bottom: 30px;
+  }
 }
