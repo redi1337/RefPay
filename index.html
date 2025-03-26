@@ -7,14 +7,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Startseite -->
   <div id="startseite" class="container">
-    <!-- Logo-Container für die Startseite -->
     <div class="logo-container">
       <img src="logo.png" alt="RefPay Logo" class="logo">
     </div>
 
-    <!-- Dropdown für die Schiedsrichter-Crew -->
     <label for="crew">Schiedsrichter-Crew:</label>
     <select id="crew">
       <option value="5" selected>5er Crew</option>
@@ -22,25 +19,18 @@
       <option value="8">8er Crew</option>
     </select>
 
-    <!-- Kilometer-Eingabefelder -->
     <div id="kilometer-felder"></div>
 
-    <!-- Buttons -->
     <button id="berechnen">Berechnen</button>
     <button id="reset">Reset</button>
   </div>
 
-  <!-- Ergebnisseite -->
   <div id="ergebnisseite" class="container" style="display: none;">
-    <!-- Logo-Container für die Ergebnisseite -->
     <div class="logo-container">
       <img src="logo.png" alt="RefPay Logo" class="logo">
     </div>
 
-    <!-- Tabelle mit den Ergebnissen -->
     <div id="ergebnis-tabelle"></div>
-
-    <!-- Zusammenfassung (Gesamtsumme und berechnete Autos) -->
     <div id="ergebnis-summary">
       <p>Gesamtsumme: 100,00 €</p>
       <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
@@ -49,17 +39,38 @@
         <li>Auto 2: 80 km × 0,35 €/km = 28,00 €</li>
       </ul>
     </div>
-
-    <!-- Zurück-Button -->
     <button id="zurueck">Zurück</button>
   </div>
 
-  <!-- Footer -->
+  <div id="impressum-page" class="container" style="display: none;">
+    <div class="impressum-content">
+      <h2>Impressum</h2>
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <p>Betreiber: Nico Lang</p>
+      <p>Kontakt: NL1337@email.de</p>
+      <p>Standort: Stuttgart (Deutschland)</p>
+      
+      <h3>Haftungshinweis</h3>
+      <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links.</p>
+      
+      <h3>Datenschutz</h3>
+      <p>Diese Website erhebt und speichert keine personenbezogenen Daten. Es werden keine Cookies oder Tracking-Tools eingesetzt.</p>
+      
+      <button id="zurueck-impressum">Zurück zur App</button>
+    </div>
+  </div>
+
   <footer>
-    RefPay v1.2
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#" id="impressum-link">Impressum</a>
+      </div>
+      <div class="version">
+        RefPay v1.2
+      </div>
+    </div>
   </footer>
 
-  <!-- JavaScript-Datei -->
   <script src="script.js"></script>
 </body>
 </html>
