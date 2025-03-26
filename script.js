@@ -1,139 +1,220 @@
-// Bezeichnungen für die Personen
-const personenBezeichnungen = {
-  1: "Referee",
-  2: "Umpire",
-  3: "Linesman",
-  4: "Linejudge",
-  5: "Backjudge",
-  6: "Sidejudge",
-  7: "Fieldjudge",
-  8: "Centerjudge",
-};
-
-// Kilometer-Eingabefelder erstellen
-function createKilometerFields(anzahlPersonen) {
-  const kilometerFelder = document.getElementById('kilometer-felder');
-  kilometerFelder.innerHTML = '';
-
-  for (let i = 1; i <= anzahlPersonen; i++) {
-    const container = document.createElement('div');
-    const label = document.createElement('label');
-    label.textContent = `${personenBezeichnungen[i]}:`;
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.placeholder = 'Kilometer';
-    input.id = `person-${i}`;
-    input.value = '';
-
-    container.appendChild(label);
-    container.appendChild(input);
-    kilometerFelder.appendChild(container);
-  }
+/* Dark Mode */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-// Initiale Felder erstellen
-window.addEventListener('load', function() {
-  createKilometerFields(5);
-});
+.container {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 500px;
+  margin: 20px 0 60px; /* Mehr Abstand unten für Footer */
+  flex-grow: 0;
+}
 
-// Crew-Größe ändern
-document.getElementById('crew').addEventListener('change', function() {
-  createKilometerFields(parseInt(this.value));
-});
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-// Reset-Button
-document.getElementById('reset').addEventListener('click', function() {
-  const inputs = document.querySelectorAll('#kilometer-felder input');
-  inputs.forEach(input => (input.value = ''));
-});
+#ergebnisseite .logo-container {
+  margin-bottom: 10px;
+}
 
-// Berechnung der Ergebnisse
-document.getElementById('berechnen').addEventListener('click', function() {
-  const anzahlPersonen = parseInt(document.getElementById('crew').value);
-  const kilometerWerte = [];
+.logo {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+}
 
-  for (let i = 1; i <= anzahlPersonen; i++) {
-    const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
-    kilometerWerte.push({ person: i, kilometer });
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #e0e0e0;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+select:focus, input:focus {
+  border-color: #28a745;
+  outline: none;
+}
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px 5px 15px; /* Mehr Abstand unten */
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+#kilometer-felder div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#kilometer-felder label {
+  width: 120px;
+  margin-right: 10px;
+  text-align: left;
+  color: #e0e0e0;
+}
+
+#kilometer-felder input {
+  flex: 1;
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+#ergebnis-tabelle table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#ergebnis-tabelle th, #ergebnis-tabelle td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+  color: #e0e0e0;
+}
+
+#ergebnis-tabelle th {
+  background-color: #333;
+}
+
+#ergebnis-summary p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.berechnete-autos-ueberschrift {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+#ergebnis-summary ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+#ergebnis-summary li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+/* Impressumsseite */
+#impressum-page {
+  max-width: 600px;
+}
+
+.impressum-content {
+  padding: 20px;
+}
+
+.impressum-content h2 {
+  color: #28a745;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.impressum-content h3 {
+  color: #e0e0e0;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.impressum-content p {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  position: relative;
+  margin-top: 20px;
+  padding: 15px 0;
+  background-color: #1e1e1e;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #28a745;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.version {
+  font-size: 12px;
+  color: #999;
+}
+
+.footer-spacer {
+  height: 20px;
+}
+
+/* Mobile Optimierungen */
+@media (max-width: 768px) {
+  .container {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
   }
-
-  const anzahlAutos = anzahlPersonen === 5 ? 2 : 3;
-  const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
-  const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-  const gesamtkosten = gesamtKilometer * 0.35;
-  const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-
-  const betraege = kilometerWerte.map(fahrer => ({
-    person: fahrer.person,
-    kilometer: fahrer.kilometer,
-    betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten)
-  }));
-
-  const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
-  const restbetrag = gesamtkosten - summeAbgerundet;
-  const restProPerson = Math.floor(restbetrag / anzahlAutos);
-
-  topFahrer.forEach(fahrer => {
-    betraege[fahrer.person - 1].betrag += restProPerson;
-  });
-
-  const verbleibenderRest = gesamtkosten - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
-  if (verbleibenderRest > 0) {
-    betraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
+  
+  button {
+    padding: 12px 24px;
   }
-
-  // Ergebnisse anzeigen
-  document.getElementById('startseite').style.display = 'none';
-  document.getElementById('ergebnisseite').style.display = 'block';
-
-  // Tabelle erstellen
-  const tabelle = `
-    <table>
-      <tr>
-        <th>Person</th>
-        <th>Kilometer</th>
-        <th>Erhaltener Betrag</th>
-      </tr>
-      ${kilometerWerte.map(fahrer => `
-        <tr>
-          <td>${personenBezeichnungen[fahrer.person]}</td>
-          <td>${fahrer.kilometer} km</td>
-          <td>${betraege.find(b => b.person === fahrer.person).betrag.toFixed(2)} €</td>
-        </tr>
-      `).join('')}
-    </table>
-  `;
-  document.getElementById('ergebnis-tabelle').innerHTML = tabelle;
-
-  // Zusammenfassung anzeigen
-  const summary = `
-    <p>Gesamtsumme: ${gesamtkosten.toFixed(2)} €</p>
-    <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
-    <ul>
-      ${topFahrer.map((fahrer, index) => `
-        <li>Auto ${index + 1}: ${fahrer.kilometer} km × 0,35 €/km = ${(fahrer.kilometer * 0.35).toFixed(2)} €</li>
-      `).join('')}
-    </ul>
-  `;
-  document.getElementById('ergebnis-summary').innerHTML = summary;
-});
-
-// Zurück-Button
-document.getElementById('zurueck').addEventListener('click', function() {
-  document.getElementById('ergebnisseite').style.display = 'none';
-  document.getElementById('startseite').style.display = 'block';
-});
-
-// Impressum-Link
-document.getElementById('impressum-link').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('startseite').style.display = 'none';
-  document.getElementById('ergebnisseite').style.display = 'none';
-  document.getElementById('impressum-page').style.display = 'block';
-});
-
-// Zurück-Button Impressum
-document.getElementById('zurueck-impressum').addEventListener('click', function() {
-  document.getElementById('impressum-page').style.display = 'none';
-  document.getElementById('startseite').style.display = 'block';
-});
+  
+  #ergebnisseite {
+    padding-bottom: 30px;
+  }
+}
