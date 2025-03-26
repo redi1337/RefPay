@@ -1,4 +1,4 @@
-c// Bezeichnungen für die Personen
+// Bezeichnungen für die Personen
 const personenBezeichnungen = {
   1: "Referee",
   2: "Umpire",
