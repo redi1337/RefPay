@@ -7,7 +7,6 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
@@ -19,7 +18,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   width: 90%;
   max-width: 500px;
-  margin: 20px 0 60px; /* Mehr Abstand unten für Footer */
+  margin: 20px 0 80px;
   flex-grow: 0;
 }
 
@@ -68,7 +67,7 @@ button {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  margin: 5px 5px 15px; /* Mehr Abstand unten */
+  margin: 5px 5px 15px;
 }
 
 button:hover {
@@ -166,31 +165,31 @@ button:hover {
 
 /* Footer */
 footer {
-  position: relative;
-  margin-top: 20px;
-  padding: 15px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #1e1e1e;
-  width: 100%;
-  text-align: center;
+  padding: 12px 0;
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
 }
 
 .footer-content {
-  display: flex;
-  flex-direction: column;
   max-width: 500px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
-.footer-links {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
+.footer-content a {
   color: #28a745;
   text-decoration: none;
 }
 
-.footer-links a:hover {
+.footer-content a:hover {
   text-decoration: underline;
 }
 
@@ -200,21 +199,30 @@ footer {
 }
 
 .footer-spacer {
-  height: 20px;
+  height: 60px;
 }
 
 /* Mobile Optimierungen */
 @media (max-width: 768px) {
   .container {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
+    margin-bottom: 70px;
+    padding-bottom: 15px;
   }
   
   button {
     padding: 12px 24px;
+    margin-bottom: 20px;
+  }
+  
+  footer {
+    padding: 10px 0;
+  }
+  
+  .footer-spacer {
+    height: 50px;
   }
   
   #ergebnisseite {
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
 }
