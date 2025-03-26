@@ -124,8 +124,15 @@ document.getElementById('zurueck').addEventListener('click', function() {
   document.getElementById('startseite').style.display = 'block';
 });
 
-// Impressum-Link
+// Impressum-Links
 document.getElementById('impressum-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('startseite').style.display = 'none';
+  document.getElementById('ergebnisseite').style.display = 'none';
+  document.getElementById('impressum-page').style.display = 'block';
+});
+
+document.getElementById('impressum-link-ergebnis').addEventListener('click', function(e) {
   e.preventDefault();
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'none';
