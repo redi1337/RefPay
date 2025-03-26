@@ -10,10 +10,10 @@ const personenBezeichnungen = {
   8: "Centerjudge",
 };
 
-// Funktion zum Erstellen der Kilometer-Eingabefelder
+// Kilometer-Eingabefelder erstellen
 function createKilometerFields(anzahlPersonen) {
   const kilometerFelder = document.getElementById('kilometer-felder');
-  kilometerFelder.innerHTML = ''; // Vorhandene Felder löschen
+  kilometerFelder.innerHTML = '';
 
   for (let i = 1; i <= anzahlPersonen; i++) {
     const container = document.createElement('div');
@@ -21,9 +21,9 @@ function createKilometerFields(anzahlPersonen) {
     label.textContent = `${personenBezeichnungen[i]}:`;
     const input = document.createElement('input');
     input.type = 'number';
-    input.placeholder = `Kilometer`;
+    input.placeholder = 'Kilometer';
     input.id = `person-${i}`;
-    input.value = ''; // Keine Vorausfüllung mit 0
+    input.value = '';
 
     container.appendChild(label);
     container.appendChild(input);
@@ -31,84 +31,62 @@ function createKilometerFields(anzahlPersonen) {
   }
 }
 
-// Beim Laden der Seite Felder für die Standardanzahl (5 Personen) erstellen
-window.addEventListener('load', function () {
-  const standardAnzahl = 5; // Standardmäßig 5 Personen
-  createKilometerFields(standardAnzahl);
+// Initiale Felder erstellen
+window.addEventListener('load', function() {
+  createKilometerFields(5);
 });
 
-// Beim Ändern der Crew-Größe Felder aktualisieren
-document.getElementById('crew').addEventListener('change', function () {
-  const anzahlPersonen = parseInt(this.value);
-  createKilometerFields(anzahlPersonen);
+// Crew-Größe ändern
+document.getElementById('crew').addEventListener('change', function() {
+  createKilometerFields(parseInt(this.value));
 });
 
-// Reset-Button: Kilometer-Eingaben auf 0 setzen
-document.getElementById('reset').addEventListener('click', function () {
+// Reset-Button
+document.getElementById('reset').addEventListener('click', function() {
   const inputs = document.querySelectorAll('#kilometer-felder input');
   inputs.forEach(input => (input.value = ''));
 });
 
-// Berechnung der Fahrtkosten und Anzeige der Ergebnisse
-document.getElementById('berechnen').addEventListener('click', function () {
+// Berechnung der Ergebnisse
+document.getElementById('berechnen').addEventListener('click', function() {
   const anzahlPersonen = parseInt(document.getElementById('crew').value);
   const kilometerWerte = [];
 
-  // Kilometerwerte sammeln
   for (let i = 1; i <= anzahlPersonen; i++) {
     const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
     kilometerWerte.push({ person: i, kilometer });
   }
 
-  // Anzahl der Autos ermitteln
   const anzahlAutos = anzahlPersonen === 5 ? 2 : 3;
-
-  // Personen mit den meisten Kilometern ermitteln (kopiere die Liste, um die ursprüngliche Reihenfolge zu behalten)
-  const topFahrer = [...kilometerWerte]
-    .sort((a, b) => b.kilometer - a.kilometer)
-    .slice(0, anzahlAutos);
-
-  // Gesamtkilometer der Top-Fahrer berechnen
+  const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
   const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-
-  // Gesamtkosten berechnen
   const gesamtkosten = gesamtKilometer * 0.35;
-
-  // Anteilige Berechnung basierend auf den gefahrenen Kilometern
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
+
   const betraege = kilometerWerte.map(fahrer => ({
     person: fahrer.person,
     kilometer: fahrer.kilometer,
-    betrag: (fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten,
+    betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten)
   }));
 
-  // Beträge auf den vollen Euro abrunden
-  const abgerundeteBetraege = betraege.map(fahrer => ({
-    ...fahrer,
-    betrag: Math.floor(fahrer.betrag), // Abrunden
-  }));
-
-  // Restbetrag berechnen
-  const summeAbgerundet = abgerundeteBetraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+  const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
   const restbetrag = gesamtkosten - summeAbgerundet;
-
-  // Restbetrag auf die Top-Fahrer aufteilen (in vollen Euro)
   const restProPerson = Math.floor(restbetrag / anzahlAutos);
-  topFahrer.forEach((fahrer, index) => {
-    abgerundeteBetraege[fahrer.person - 1].betrag += restProPerson;
+
+  topFahrer.forEach(fahrer => {
+    betraege[fahrer.person - 1].betrag += restProPerson;
   });
 
-  // Verbleibenden Restbetrag dem Fahrer mit den meisten Kilometern gutschreiben
-  const verbleibenderRest = gesamtkosten - abgerundeteBetraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+  const verbleibenderRest = gesamtkosten - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
   if (verbleibenderRest > 0) {
-    abgerundeteBetraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
+    betraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
   }
 
   // Ergebnisse anzeigen
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
 
-  // Tabelle erstellen (behält die Reihenfolge der Startseite)
+  // Tabelle erstellen
   const tabelle = `
     <table>
       <tr>
@@ -116,45 +94,46 @@ document.getElementById('berechnen').addEventListener('click', function () {
         <th>Kilometer</th>
         <th>Erhaltener Betrag</th>
       </tr>
-      ${kilometerWerte
-        .map(
-          (fahrer) => {
-            const betrag = abgerundeteBetraege.find(b => b.person === fahrer.person).betrag;
-            return `
-              <tr>
-                <td>${personenBezeichnungen[fahrer.person]}</td>
-                <td>${fahrer.kilometer} km</td>
-                <td>${betrag.toFixed(2)} €</td>
-              </tr>
-            `;
-          }
-        )
-        .join('')}
+      ${kilometerWerte.map(fahrer => `
+        <tr>
+          <td>${personenBezeichnungen[fahrer.person]}</td>
+          <td>${fahrer.kilometer} km</td>
+          <td>${betraege.find(b => b.person === fahrer.person).betrag.toFixed(2)} €</td>
+        </tr>
+      `).join('')}
     </table>
   `;
   document.getElementById('ergebnis-tabelle').innerHTML = tabelle;
 
-  // Zusammenfassung anzeigen (Top-Autos als "Auto 1", "Auto 2" usw.)
+  // Zusammenfassung anzeigen
   const summary = `
     <p>Gesamtsumme: ${gesamtkosten.toFixed(2)} €</p>
-    <p>Berechnete Autos:</p>
+    <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
     <ul>
-      ${topFahrer
-        .map(
-          (fahrer, index) => `
-        <li>Auto ${index + 1}: ${fahrer.kilometer} km × 0,35 €/km = ${(
-            fahrer.kilometer * 0.35
-          ).toFixed(2)} €</li>
-      `
-        )
-        .join('')}
+      ${topFahrer.map((fahrer, index) => `
+        <li>Auto ${index + 1}: ${fahrer.kilometer} km × 0,35 €/km = ${(fahrer.kilometer * 0.35).toFixed(2)} €</li>
+      `).join('')}
     </ul>
   `;
   document.getElementById('ergebnis-summary').innerHTML = summary;
 });
 
-// Zurück-Button: Zur Startseite zurückkehren
-document.getElementById('zurueck').addEventListener('click', function () {
-  document.getElementById('startseite').style.display = 'block';
+// Zurück-Button
+document.getElementById('zurueck').addEventListener('click', function() {
   document.getElementById('ergebnisseite').style.display = 'none';
+  document.getElementById('startseite').style.display = 'block';
+});
+
+// Impressum-Link
+document.getElementById('impressum-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('startseite').style.display = 'none';
+  document.getElementById('ergebnisseite').style.display = 'none';
+  document.getElementById('impressum-page').style.display = 'block';
+});
+
+// Zurück-Button Impressum
+document.getElementById('zurueck-impressum').addEventListener('click', function() {
+  document.getElementById('impressum-page').style.display = 'none';
+  document.getElementById('startseite').style.display = 'block';
 });
