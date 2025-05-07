@@ -63,23 +63,38 @@ document.getElementById('berechnen').addEventListener('click', function() {
   const gesamtkosten = gesamtKilometer * 0.35;
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
 
-  const betraege = kilometerWerte.map(fahrer => ({
-    person: fahrer.person,
-    kilometer: fahrer.kilometer,
-    betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten)
-  }));
+  // Anzahl der Personen mit Kilometer > 0
+  const aktivePersonen = kilometerWerte.filter(fahrer => fahrer.kilometer > 0).length;
 
-  const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
-  const restbetrag = gesamtkosten - summeAbgerundet;
-  const restProPerson = Math.floor(restbetrag / anzahlAutos);
+  let betraege;
+  
+  // Wenn Anzahl aktiver Personen <= Anzahl Autos, keine Rundung
+  if (aktivePersonen <= anzahlAutos) {
+    betraege = kilometerWerte.map(fahrer => ({
+      person: fahrer.person,
+      kilometer: fahrer.kilometer,
+      betrag: fahrer.kilometer > 0 ? (fahrer.kilometer * 0.35) : 0
+    }));
+  } else {
+    // Normale Berechnung mit Rundung
+    betraege = kilometerWerte.map(fahrer => ({
+      person: fahrer.person,
+      kilometer: fahrer.kilometer,
+      betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten)
+    }));
 
-  topFahrer.forEach(fahrer => {
-    betraege[fahrer.person - 1].betrag += restProPerson;
-  });
+    const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+    const restbetrag = gesamtkosten - summeAbgerundet;
+    const restProPerson = Math.floor(restbetrag / anzahlAutos);
 
-  const verbleibenderRest = gesamtkosten - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
-  if (verbleibenderRest > 0) {
-    betraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
+    topFahrer.forEach(fahrer => {
+      betraege[fahrer.person - 1].betrag += restProPerson;
+    });
+
+    const verbleibenderRest = gesamtkosten - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+    if (verbleibenderRest > 0) {
+      betraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
+    }
   }
 
   // Ergebnisse anzeigen
