@@ -45,22 +45,28 @@ document.getElementById('crew').addEventListener('change', function() {
 document.getElementById('reset').addEventListener('click', function() {
   const inputs = document.querySelectorAll('#kilometer-felder input');
   inputs.forEach(input => (input.value = ''));
+  document.getElementById('szenario').value = 'einzelspiel';
+  document.getElementById('jugendspiel').checked = false;
 });
 
 // Berechnung der Ergebnisse
 document.getElementById('berechnen').addEventListener('click', function() {
   const anzahlPersonen = parseInt(document.getElementById('crew').value);
   const kilometerWerte = [];
+  const szenario = document.getElementById('szenario').value;
+  const isJugendspiel = document.getElementById('jugendspiel').checked;
 
+  // Kilometerwerte sammeln
   for (let i = 1; i <= anzahlPersonen; i++) {
     const kilometer = parseFloat(document.getElementById(`person-${i}`).value) || 0;
     kilometerWerte.push({ person: i, kilometer });
   }
 
+  // KFZ-Kosten berechnen
   const anzahlAutos = anzahlPersonen === 5 ? 2 : 3;
   const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
   const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
-  const gesamtkosten = gesamtKilometer * 0.35;
+  const gesamtkostenKFZ = gesamtKilometer * 0.35;
   const gesamteGefahreneKilometer = kilometerWerte.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
 
   // Anzahl der Personen mit Kilometer > 0
@@ -80,34 +86,57 @@ document.getElementById('berechnen').addEventListener('click', function() {
     betraege = kilometerWerte.map(fahrer => ({
       person: fahrer.person,
       kilometer: fahrer.kilometer,
-      betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkosten)
+      betrag: Math.floor((fahrer.kilometer / gesamteGefahreneKilometer) * gesamtkostenKFZ)
     }));
 
     const summeAbgerundet = betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
-    const restbetrag = gesamtkosten - summeAbgerundet;
+    const restbetrag = gesamtkostenKFZ - summeAbgerundet;
     const restProPerson = Math.floor(restbetrag / anzahlAutos);
 
     topFahrer.forEach(fahrer => {
       betraege[fahrer.person - 1].betrag += restProPerson;
     });
 
-    const verbleibenderRest = gesamtkosten - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
+    const verbleibenderRest = gesamtkostenKFZ - betraege.reduce((sum, fahrer) => sum + fahrer.betrag, 0);
     if (verbleibenderRest > 0) {
       betraege[topFahrer[0].person - 1].betrag += verbleibenderRest;
     }
   }
 
+  // Aufwandsentschädigungen berechnen
+  let refereeEntschaedigung = 0;
+  let andereEntschaedigung = 0;
+  let jugendspielEntschaedigung = isJugendspiel ? 25 * anzahlPersonen : 0;
+
+  switch(szenario) {
+    case 'einzelspiel':
+      refereeEntschaedigung = 60;
+      andereEntschaedigung = 50 * (anzahlPersonen - 1);
+      break;
+    case 'turnier6':
+      refereeEntschaedigung = 60;
+      andereEntschaedigung = 60 * (anzahlPersonen - 1);
+      break;
+    case 'turnier6plus':
+      refereeEntschaedigung = 80;
+      andereEntschaedigung = 80 * (anzahlPersonen - 1);
+      break;
+  }
+
+  // Gesamtbetrag berechnen
+  const gesamtbetrag = refereeEntschaedigung + andereEntschaedigung + jugendspielEntschaedigung + gesamtkostenKFZ;
+
   // Ergebnisse anzeigen
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
 
-  // Tabelle erstellen
+  // Tabelle mit Personen und KFZ-Erstattungen erstellen
   const tabelle = `
     <table>
       <tr>
         <th>Person</th>
         <th>Kilometer</th>
-        <th>Erhaltener Betrag</th>
+        <th>KFZ-Erstattung</th>
       </tr>
       ${kilometerWerte.map(fahrer => `
         <tr>
@@ -120,17 +149,22 @@ document.getElementById('berechnen').addEventListener('click', function() {
   `;
   document.getElementById('ergebnis-tabelle').innerHTML = tabelle;
 
-  // Zusammenfassung anzeigen
-  const summary = `
-    <p>Gesamtsumme: ${gesamtkosten.toFixed(2)} €</p>
-    <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
-    <ul>
-      ${topFahrer.map((fahrer, index) => `
-        <li>Auto ${index + 1}: ${fahrer.kilometer} km × 0,35 €/km = ${(fahrer.kilometer * 0.35).toFixed(2)} €</li>
-      `).join('')}
-    </ul>
-  `;
-  document.getElementById('ergebnis-summary').innerHTML = summary;
+  // Schiedsrichter Anzahl anzeigen
+  document.getElementById('andere-sr-anzahl').textContent = anzahlPersonen - 1;
+  document.getElementById('gesamt-sr-anzahl').textContent = anzahlPersonen;
+
+  // KFZ-Kosten in Tabelle eintragen
+  document.getElementById('auto1-kosten').textContent = topFahrer[0] ? `${(topFahrer[0].kilometer * 0.35).toFixed(2)} €` : "0.00 €";
+  document.getElementById('auto2-kosten').textContent = topFahrer[1] ? `${(topFahrer[1].kilometer * 0.35).toFixed(2)} €` : "0.00 €";
+  document.getElementById('auto3-kosten').textContent = topFahrer[2] ? `${(topFahrer[2].kilometer * 0.35).toFixed(2)} €` : "-";
+
+  // Aufwandsentschädigungen in Tabelle eintragen
+  document.getElementById('referee-entschaedigung').textContent = `${refereeEntschaedigung.toFixed(2)} €`;
+  document.getElementById('andere-entschaedigung').textContent = `${andereEntschaedigung.toFixed(2)} €`;
+  document.getElementById('jugendspiel-entschaedigung').textContent = isJugendspiel ? `${jugendspielEntschaedigung.toFixed(2)} €` : "-";
+
+  // Gesamtbetrag anzeigen
+  document.getElementById('gesamtbetrag').textContent = `${gesamtbetrag.toFixed(2)} €`;
 });
 
 // Zurück-Button

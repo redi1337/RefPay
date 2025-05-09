@@ -20,6 +20,17 @@
       <option value="8">8er Crew</option>
     </select>
 
+    <label for="szenario">Abrechnungsszenario:</label>
+    <select id="szenario">
+      <option value="einzelspiel" selected>1 Spiel (Ref: 60€, andere: 50€)</option>
+      <option value="turnier6">Turnier (bis 6 Halbzeiten, alle 60€)</option>
+      <option value="turnier6plus">Turnier (mehr als 6 Halbzeiten, alle 80€)</option>
+    </select>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="jugendspiel"> Jugendspiel - Double Header (+25€ pro Person)
+    </label>
+
     <div id="kilometer-felder"></div>
 
     <button id="berechnen">Berechnen</button>
@@ -27,7 +38,7 @@
 
     <div class="container-footer">
       <a href="#" id="impressum-link">Impressum</a>
-      <span class="version">RefPay v1.2</span>
+      <span class="version">RefPay v2.0</span>
     </div>
   </div>
 
@@ -39,18 +50,47 @@
 
     <div id="ergebnis-tabelle"></div>
     <div id="ergebnis-summary">
-      <p>Gesamtsumme: 100,00 €</p>
-      <p class="berechnete-autos-ueberschrift">Berechnete Autos:</p>
-      <ul>
-        <li>Auto 1: 100 km × 0,35 €/km = 35,00 €</li>
-        <li>Auto 2: 80 km × 0,35 €/km = 28,00 €</li>
-      </ul>
+      <h3>Aufwandsentschädigung</h3>
+      <table class="kosten-tabelle">
+        <tr>
+          <td>Referee</td>
+          <td id="referee-entschaedigung">0.00 €</td>
+        </tr>
+        <tr>
+          <td>Schiedsrichter (Anzahl: <span id="andere-sr-anzahl">0</span>)</td>
+          <td id="andere-entschaedigung">0.00 €</td>
+        </tr>
+        <tr>
+          <td>KFZ 1</td>
+          <td id="auto1-kosten">0.00 €</td>
+        </tr>
+        <tr>
+          <td>KFZ 2</td>
+          <td id="auto2-kosten">0.00 €</td>
+        </tr>
+        <tr>
+          <td>KFZ 3</td>
+          <td id="auto3-kosten">-</td>
+        </tr>
+        <tr>
+          <td>Jugendspiel</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Schiedsrichter (Anzahl: <span id="gesamt-sr-anzahl">0</span>)</td>
+          <td id="jugendspiel-entschaedigung">-</td>
+        </tr>
+        <tr class="gesamtzeile">
+          <td><strong>Gesamtbetrag</strong></td>
+          <td id="gesamtbetrag">0.00 €</td>
+        </tr>
+      </table>
     </div>
     <button id="zurueck">Zurück</button>
 
     <div class="container-footer">
       <a href="#" id="impressum-link-ergebnis">Impressum</a>
-      <span class="version">RefPay v1.2</span>
+      <span class="version">RefPay v2.0</span>
     </div>
   </div>
 
@@ -73,7 +113,7 @@
     </div>
 
     <div class="container-footer">
-      <span class="version">RefPay v1.2</span>
+      <span class="version">RefPay v2.0</span>
     </div>
   </div>
 

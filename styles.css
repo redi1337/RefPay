@@ -74,6 +74,17 @@ button:hover {
   background-color: #218838;
 }
 
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-label input {
+  width: auto;
+  margin-right: 10px;
+}
+
 #kilometer-felder div {
   display: flex;
   align-items: center;
@@ -97,6 +108,7 @@ button:hover {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #ergebnis-tabelle th, #ergebnis-tabelle td {
@@ -110,30 +122,31 @@ button:hover {
   background-color: #333;
 }
 
-#ergebnis-summary p {
-  margin-bottom: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #e0e0e0;
+#ergebnis-summary h3 {
+  color: #28a745;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.berechnete-autos-ueberschrift {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #e0e0e0;
-}
-
-#ergebnis-summary ul {
-  list-style-type: none;
-  padding: 0;
+.kosten-tabelle {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 10px;
 }
 
-#ergebnis-summary li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #e0e0e0;
+.kosten-tabelle td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+
+.kosten-tabelle tr:last-child {
+  border-top: 2px solid #444;
+}
+
+.gesamtzeile td {
+  font-weight: bold;
+  background-color: #252525;
 }
 
 /* Container Footer */
