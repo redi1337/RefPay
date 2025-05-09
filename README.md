@@ -1,10 +1,30 @@
-RefPay v 1.3
-    
-    Öffnen Sie die Seite im Browser.
-    Geben Sie die Crewgrüße und die Kilometer ein und klicken Sie auf Berechnen.
-    Die Ergebnis-Seite wird angezeigt.
-    Bei der 5er Crew werden 2 Autos abgerechnet, bei 7/8er Crew 3.
-    Der Preis wird immer auf den vollen euro runtergerechnet und der Restbetrag dann fair aufgeteilt.
-    Sollte ein Restbetrag unter 50 cent anfallen wird dieser dem Fahrer mit den meisten KM gutgeschrieben.
-    Klicken Sie auf Zurück, um zur Startseite zurückzukehren.
-    Verwenden Sie den Reset-Button, um alle Kilometer-Eingaben auf 0 zu setzen.
+RefPay v 2.0
+
+# RefPay - Schiedsrichter-Abrechnungstool
+
+## Funktionen
+- Berechnung von Aufwandsentschädigungen für Schiedsrichter-Crews (5er, 7er, 8er)
+- Automatische KFZ-Kostenverteilung (2 Autos bei 5er-Crew, 3 Autos bei 7er/8er-Crew)
+- Verschiedene Abrechnungsszenarien:
+  - Einzelspiel (Referee: 60€, andere: 50€)
+  - Turnier bis 6 Halbzeiten (alle 60€)
+  - Turnier über 6 Halbzeiten (alle 80€)
+- Zuschlag für Jugendspiel/Double Header (+25€ pro Person)
+
+## Bedienung
+1. Crew-Größe auswählen
+2. Abrechnungsszenario auswählen
+3. Bei Bedarf "Jugendspiel - Double Header" aktivieren
+4. Für jede Person die gefahrenen Kilometer eintragen
+5. Auf "Berechnen" klicken
+
+## Ergebnisübersicht
+Die Berechnung zeigt:
+- Aufwandsentschädigungen pro Position
+- KFZ-Kosten aufgeteilt nach Fahrzeugen
+- Jugendspiel-Zuschlag (falls aktiviert)
+- Gesamtbetrag aller Positionen
+
+## Systemvoraussetzungen
+- Moderner Browser (Chrome, Firefox, Edge)
+- Internetverbindung (nur für erste Ladung)
