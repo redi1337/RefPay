@@ -1,24 +1,73 @@
-// Bezeichnungen für die Personen
-const personenBezeichnungen = {
-  1: "Referee",
-  2: "Umpire",
-  3: "Linesman",
-  4: "Linejudge",
-  5: "Backjudge",
-  6: "Sidejudge",
-  7: "Fieldjudge",
-  8: "Centerjudge",
-};
+// Bezeichnungen für die Personen basierend auf Crew-Größe
+function getPersonenBezeichnungen(anzahlPersonen) {
+  switch(anzahlPersonen) {
+    case 3:
+      return {
+        1: "Referee",
+        2: "Linesman", 
+        3: "Backjudge"
+      };
+    case 4:
+      return {
+        1: "Referee",
+        2: "Linesman",
+        3: "Linejudge",
+        4: "Backjudge"
+      };
+    case 5:
+      return {
+        1: "Referee",
+        2: "Umpire",
+        3: "Linesman",
+        4: "Linejudge",
+        5: "Backjudge"
+      };
+    case 7:
+      return {
+        1: "Referee",
+        2: "Umpire",
+        3: "Linesman",
+        4: "Linejudge",
+        5: "Backjudge",
+        6: "Sidejudge",
+        7: "Fieldjudge"
+      };
+    case 8:
+      return {
+        1: "Referee",
+        2: "Umpire",
+        3: "Linesman",
+        4: "Linejudge",
+        5: "Backjudge",
+        6: "Sidejudge",
+        7: "Fieldjudge",
+        8: "Centerjudge"
+      };
+    default:
+      return {
+        1: "Referee",
+        2: "Umpire",
+        3: "Linesman",
+        4: "Linejudge",
+        5: "Backjudge",
+        6: "Sidejudge",
+        7: "Fieldjudge",
+        8: "Centerjudge"
+      };
+  }
+}
 
 // Kilometer-Eingabefelder erstellen
 function createKilometerFields(anzahlPersonen) {
   const kilometerFelder = document.getElementById('kilometer-felder');
   kilometerFelder.innerHTML = '';
 
+  const bezeichnungen = getPersonenBezeichnungen(anzahlPersonen);
+
   for (let i = 1; i <= anzahlPersonen; i++) {
     const container = document.createElement('div');
     const label = document.createElement('label');
-    label.textContent = `${personenBezeichnungen[i]}:`;
+    label.textContent = `${bezeichnungen[i]}:`;
     const input = document.createElement('input');
     input.type = 'number';
     input.placeholder = 'Kilometer';
@@ -33,7 +82,7 @@ function createKilometerFields(anzahlPersonen) {
 
 // Initiale Felder erstellen
 window.addEventListener('load', function() {
-  createKilometerFields(5);
+  createKilometerFields(5); // Standard bleibt 5er Crew
 });
 
 // Crew-Größe ändern
@@ -62,8 +111,8 @@ document.getElementById('berechnen').addEventListener('click', function() {
     kilometerWerte.push({ person: i, kilometer });
   }
 
-  // KFZ-Kosten berechnen
-  const anzahlAutos = anzahlPersonen === 5 ? 2 : 3;
+  // KFZ-Kosten berechnen - 2 Autos für 3er, 4er und 5er Crew, 3 Autos für 7er und 8er Crew
+  const anzahlAutos = (anzahlPersonen <= 5) ? 2 : 3;
   const topFahrer = [...kilometerWerte].sort((a, b) => b.kilometer - a.kilometer).slice(0, anzahlAutos);
   const gesamtKilometer = topFahrer.reduce((sum, fahrer) => sum + fahrer.kilometer, 0);
   const gesamtkostenKFZ = gesamtKilometer * 0.35;
@@ -130,6 +179,9 @@ document.getElementById('berechnen').addEventListener('click', function() {
   document.getElementById('startseite').style.display = 'none';
   document.getElementById('ergebnisseite').style.display = 'block';
 
+  // Bezeichnungen für die Tabelle holen
+  const bezeichnungen = getPersonenBezeichnungen(anzahlPersonen);
+
   // Tabelle mit Personen und KFZ-Erstattungen erstellen
   const tabelle = `
     <table>
@@ -140,7 +192,7 @@ document.getElementById('berechnen').addEventListener('click', function() {
       </tr>
       ${kilometerWerte.map(fahrer => `
         <tr>
-          <td>${personenBezeichnungen[fahrer.person]}</td>
+          <td>${bezeichnungen[fahrer.person]}</td>
           <td>${fahrer.kilometer} km</td>
           <td>${betraege.find(b => b.person === fahrer.person).betrag.toFixed(2)} €</td>
         </tr>
