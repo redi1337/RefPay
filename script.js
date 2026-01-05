@@ -159,16 +159,16 @@ document.getElementById('berechnen').addEventListener('click', function() {
 
   switch(szenario) {
     case 'einzelspiel':
-      refereeEntschaedigung = 60;
-      andereEntschaedigung = 50 * (anzahlPersonen - 1);
-      break;
-    case 'turnier6':
-      refereeEntschaedigung = 60;
+      refereeEntschaedigung = 70;
       andereEntschaedigung = 60 * (anzahlPersonen - 1);
       break;
+    case 'turnier6':
+      refereeEntschaedigung = 70;
+      andereEntschaedigung = 70 * (anzahlPersonen - 1);
+      break;
     case 'turnier6plus':
-      refereeEntschaedigung = 80;
-      andereEntschaedigung = 80 * (anzahlPersonen - 1);
+      refereeEntschaedigung = 90;
+      andereEntschaedigung = 90 * (anzahlPersonen - 1);
       break;
   }
 
