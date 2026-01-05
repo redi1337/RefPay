@@ -1,18 +1,18 @@
-RefPay v 2.0
-
 # RefPay - Schiedsrichter-Abrechnungstool
 
 ## Funktionen
-- Berechnung von Aufwandsentschädigungen für Schiedsrichter-Crews (5er, 7er, 8er)
-- Automatische KFZ-Kostenverteilung (2 Autos bei 5er-Crew, 3 Autos bei 7er/8er-Crew)
+- Berechnung von Aufwandsentschädigungen für Schiedsrichter-Crews (3er, 4er, 5er, 7er, 8er)
+- Automatische KFZ-Kostenverteilung:
+  - 2 Autos bei 3er, 4er und 5er Crew
+  - 3 Autos bei 7er und 8er Crew
 - Verschiedene Abrechnungsszenarien:
-  - Einzelspiel (Referee: 60€, andere: 50€)
-  - Turnier bis 6 Halbzeiten (alle 60€)
-  - Turnier über 6 Halbzeiten (alle 80€)
+  - Einzelspiel (Referee: 70€, andere: 60€)
+  - Turnier bis 6 Halbzeiten (alle 70€)
+  - Turnier über 6 Halbzeiten (alle 90€)
 - Zuschlag für Jugendspiel/Double Header (+25€ pro Person)
 
 ## Bedienung
-1. Crew-Größe auswählen
+1. Crew-Größe auswählen (3er, 4er, 5er, 7er oder 8er)
 2. Abrechnungsszenario auswählen
 3. Bei Bedarf "Jugendspiel - Double Header" aktivieren
 4. Für jede Person die gefahrenen Kilometer eintragen
